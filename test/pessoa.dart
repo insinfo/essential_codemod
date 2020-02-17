@@ -1,3 +1,5 @@
+
+
 //extends List with List  implements DateTime
 class Pessoa {
   int id;
@@ -8,7 +10,7 @@ class Pessoa {
   bool isGay;
   DateTime nascimento;
   final dynamic test;
-  List<Telefone> telefones;
+  List<DateTime> telefones;
   Pessoa(this.test);
 
   int calcIdade(int nasc) {

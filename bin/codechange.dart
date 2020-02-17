@@ -17,7 +17,6 @@ void main(List<String> args) {
     patternStr,
     multiLine: true,
   );
-
   var contents = '''
     class Pessoa {
   var semTipo;
@@ -33,7 +32,6 @@ void main(List<String> args) {
   calc() {}
 }
      ''';
-
   for (final match in regex.allMatches(contents)) {
     final line = match.group(0);
     print("isaque group 0 ${match.group(0)}");
@@ -49,7 +47,7 @@ void main(List<String> args) {
     ..addFlag(
       recursive,
       help: 'Apply updates to Dart files in the current directory recursive',
-      defaultsTo: true,
+      defaultsTo: false,
     )
     ..addFlag(
       modelsDir,
@@ -75,16 +73,17 @@ void main(List<String> args) {
   //print(useModelsDir);
   var currentDir = '${Directory.current.path}';
 
+  var visitor = ModelClassVisitor();
+  var jsonSeriali = ImplementsJsonSerialization();
+  jsonSeriali.modelVisitor = visitor;
+
   exitCode = runInteractiveCodemodSequence(
     FileQuery.dir(
       path: currentDir,
       pathFilter: isFileSelected,
       recursive: parsed[recursive],
     ),
-    [
-          
-      ImplementsJsonSerialization()
-    ],
+    [visitor, jsonSeriali],
     args: args
         .where((name) => !name.contains(help) && !name.contains(useModelsDir) && !name.contains(recursive))
         .toList(),

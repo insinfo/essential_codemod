@@ -7,6 +7,7 @@ import 'code_template.dart';
 import '../type_definictions/core_types.dart';
 
 class ImplementsJsonSerialization implements Suggestor {
+  ModelClassVisitor modelVisitor;
   @override
   bool shouldSkip(String sourceFileContents) {
     return false;
@@ -16,8 +17,6 @@ class ImplementsJsonSerialization implements Suggestor {
   Iterable<Patch> generatePatches(SourceFile sourceFile) sync* {
     final contents = sourceFile.getText(0);
 
-    var modelVisitor = ModelClassVisitor();
-
     var patternStr = modelVisitor.classDeclarationLine;
     final regex = RegExp(
       patternStr,
@@ -26,8 +25,7 @@ class ImplementsJsonSerialization implements Suggestor {
 
     final target = StringBuffer();
     target.writeln(patternStr);
-    target
-        .writeln(CodeTemplate.getInstance().genFromJson(modelVisitor.listProperties, modelVisitor.className));
+    target.writeln(CodeTemplate.getInstance().genFromJson(modelVisitor.listProperties, modelVisitor.className));
     target.writeln(CodeTemplate.getInstance().genToJson(modelVisitor.listProperties));
 
     for (final match in regex.allMatches(contents)) {
@@ -46,8 +44,7 @@ class ImplementsJsonSerialization implements Suggestor {
   }
 }
 
-class ModelClassVisitor extends GeneralizingAstVisitor {
-  //with AstVisitingSuggestorMixin
+class ModelClassVisitor extends GeneralizingAstVisitor with AstVisitingSuggestorMixin {
   bool isConstruct = false;
   bool isMethod = false;
   bool isClassDeclaration = false;
