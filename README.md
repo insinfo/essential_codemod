@@ -1,4 +1,4 @@
-# rxdart_codemod
+# essential_codemod
 
 [![Build Status](https://api.travis-ci.org/brianegan/rxdart_codemod.svg?branch=master)](https://travis-ci.org/brianegan/rxdart_codemod)
 [![codecov](https://codecov.io/gh/brianegan/rxdart_codemod/branch/master/graph/badge.svg)](https://codecov.io/gh/brianegan/rxdart_codemod)
