@@ -10,7 +10,7 @@ class Pessoa {
   bool isGay;
   DateTime nascimento;
   final dynamic test;
-  List<DateTime> telefones;
+  List<Telefone> telefones;
   Pessoa(this.test);
 
   int calcIdade(int nasc) {
