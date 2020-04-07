@@ -27,14 +27,3 @@ cd path/to/your/code
 pub global run essential_codemod:codechange
 ```
 
-## Arguments
-
-```
-    --[no-]recursive    Apply updates to Dart files in the current directory and all subdirectories recursively.
-                        (defaults to on)
-
-    --[no-]classes      Use Stream classes instead of Rx factories. Example: "TimerStream" instead of "Rx.timer"
-                        (defaults to off)
-
--h, --help              Prints the help menu
-```
